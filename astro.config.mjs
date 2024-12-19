@@ -6,7 +6,7 @@ import tailwind from "@astrojs/tailwind";
 
 import svelte from "@astrojs/svelte";
 
-import node from "@astrojs/node";
+import netlify from "@astrojs/netlify";
 
 // https://astro.build/config
 export default defineConfig({
@@ -21,7 +21,5 @@ export default defineConfig({
 
   output: "static",
 
-  adapter: node({
-    mode: "standalone",
-  }),
+  adapter: netlify(),
 });
