@@ -1,6 +1,5 @@
 ---
 import { Image } from "astro:assets";
-import { FRONT_END_URL } from "astro:env/client";
 import { calculatePercent, formatCurrency } from "@/lib/currency-utils";
 import Divider from "./Divider.astro";
 import type { Product } from "@/data/entities/Product";
@@ -14,7 +13,7 @@ const { description, price, primaryImage, slug, title, discountedPrice } =
 ---
 
 <a
-  href={`${FRONT_END_URL}/productos/${slug}`}
+  href={`/productos/${slug}`}
   class="bg-white rounded-lg shadow-md w-full flex flex-col group"
 >
   <div
