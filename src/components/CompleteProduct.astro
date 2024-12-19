@@ -1,0 +1,92 @@
+---
+import ProductImageList from "@/components/ProductImageList.svelte";
+import ProductRepository from "@/data/repositories/ProductRepository";
+import { calculatePercent, formatCurrency } from "@/lib/currency-utils";
+import ProductCard from "./ProductCard.astro";
+import AddToCartButton from "./AddCartButton.svelte";
+import Divider from "./Divider.astro";
+
+interface Props {
+  slug: string;
+}
+
+const { slug } = Astro.props;
+
+const productRepository = new ProductRepository();
+const product = await productRepository.getProduct(slug);
+
+const sameCategoryProducts = await productRepository.getByCategory(
+  product.category
+);
+---
+
+<article
+  class="w-[95%] md:w-[80%] lg:w-[70%] bg-white lg:flex mx-auto my-20 gap-x-5"
+>
+  <div class="lg:w-1/2">
+    <ProductImageList
+      client:load
+      title={product.title}
+      images={[
+        product.primaryImage,
+        "https://http2.mlstatic.com/D_NQ_NP_628916-MLA81007003934_122024-O.webp",
+        "https://http2.mlstatic.com/D_NQ_NP_787193-MLA81011612012_122024-O.webp",
+      ]}
+    />
+  </div>
+  <div class="lg:w-1/2 space-y-5">
+    <h1
+      class="text-3xl font-bold"
+      id="product-title"
+      data-title={product.title}
+    >
+      {product.title}
+    </h1>
+    <p>{product.description}</p>
+    <p
+      class:list={[
+        "font-semibold line-through",
+        !product.discountedPrice ? "text-white" : "text-slate-500",
+      ]}
+    >
+      {formatCurrency(product.discountedPrice ? product.price : 0)}
+    </p>
+
+    <div class="flex gap-x-2">
+      <p class="font-semibold text-4xl">
+        {
+          formatCurrency(
+            product.discountedPrice ? product.discountedPrice : product.price
+          )
+        }
+      </p>
+      {
+        product.discountedPrice && (
+          <p class="text-green-500">
+            {calculatePercent(product.price, product.discountedPrice)}% OFF
+          </p>
+        )
+      }
+    </div>
+    <Divider />
+    <AddToCartButton client:load product={product} />
+  </div>
+</article>
+<section class="bg-bgsecondary">
+  <div
+    class="w-[60%] mx-auto grid lg:grid-cols-2 xl:grid-cols-3 gap-x-10 gap-y-20 py-20"
+  >
+    {sameCategoryProducts.map((product) => <ProductCard product={product} />)}
+  </div>
+</section>
+
+<script>
+  const productTitle =
+    document.querySelector<HTMLHeadingElement>("#product-title");
+
+  const title = productTitle?.getAttribute("data-title");
+
+  if (title) {
+    document.title = title + " - Crv Sport";
+  }
+</script>

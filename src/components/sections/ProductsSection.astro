@@ -1,0 +1,19 @@
+---
+import SectionContainer from "../SectionContainer.astro";
+import ProductCard from "../ProductCard.astro";
+import type { Product } from "@/data/entities/Product";
+
+interface Props {
+  title: string;
+  id: string;
+  products: Product[];
+}
+
+const { id, products, title } = Astro.props;
+---
+
+<SectionContainer title={title} id={id} class="pt-24">
+  <div class="grid lg:grid-cols-2 xl:grid-cols-3 gap-x-10 gap-y-20 py-20">
+    {products.map((product) => <ProductCard product={product} />)}
+  </div>
+</SectionContainer>

@@ -1,0 +1,62 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+// import ProductRepository from "@/data/repositories/ProductRepository";
+import SectionContainer from "@/components/SectionContainer.astro";
+import CategoryLink from "@/components/CategoryLink.astro";
+import ShopSection from "@/components/sections/ShopSection.astro";
+import ShopSectionSkeleton from "@/components/sections/ShopSectionSkeleton.astro";
+
+// const productRepository = new ProductRepository();
+
+const categories = [
+  "electronics",
+  "jewelery",
+  "men's clothing",
+  "women's clothing",
+];
+---
+
+<MainLayout title="Tienda" currentPath="Tienda">
+  <SectionContainer id="tienda-section" class="min-h-screen pt-20 flex">
+    <div class="flex gap-y-10 w-full">
+      <section class="w-1/4 sticky top-0">
+        <h3 class="text-primary text-3xl font-bold">Categorias</h3>
+        <ul class="mt-10 flex gap-5 flex-wrap">
+          {
+            categories.map((category) => (
+              <li>
+                <CategoryLink category={category} />
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+      <section class="w-3/4">
+        <header
+          class="bg-pexels-photo w-full h-52 bg-cover bg-center rounded-xl"
+        >
+          <div
+            class="bg-black/50 h-full w-full rounded-xl flex items-center justify-between px-20 gap-x-10"
+          >
+            <div>
+              <h3 class="text-white text-4xl font-bold">Suplementos</h3>
+              <p class="text-white text-balance">
+                Cumple tus objetivos con la mejor suplementación!
+              </p>
+            </div>
+            <a
+              href="#"
+              class:list={[
+                "text-white px-10 py-2 border-2 border-white rounded-lg",
+                "hover:bg-primary transition-colors hover:border-primary duration-300",
+              ]}>Ver Todos</a
+            >
+          </div>
+        </header>
+        <ShopSection server:defer>
+          <ShopSectionSkeleton slot="fallback" />
+        </ShopSection>
+      </section>
+    </div>
+  </SectionContainer>
+</MainLayout>

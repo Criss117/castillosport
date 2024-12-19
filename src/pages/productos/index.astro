@@ -1,0 +1,9 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+
+export const prerender = false;
+---
+
+<MainLayout title="Tienda" currentPath="Tienda">
+  <div>{Date.now()}</div>
+</MainLayout>

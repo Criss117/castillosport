@@ -1,0 +1,76 @@
+---
+import { HEROIMAGES } from "@/lib/constants";
+import { Image } from "astro:assets";
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/pagination";
+---
+
+<section id="hero-slider">
+  <div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+      {
+        HEROIMAGES.map((hi) => (
+          <div class="swiper-slide">
+            <Image
+              src={hi.src}
+              alt={hi.alt}
+              class="aspect-video"
+              width={500}
+              height={300}
+            />
+          </div>
+        ))
+      }
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+</section>
+
+<script>
+  import Swiper from "swiper";
+  import { Autoplay, EffectCoverflow, Pagination } from "swiper/modules";
+
+  document.addEventListener("astro:page-load", () => {
+    new Swiper(".mySwiper", {
+      effect: "coverflow",
+      initialSlide: 1,
+      autoplay: {
+        delay: 3000,
+      },
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: "auto",
+      coverflowEffect: {
+        rotate: 50,
+        stretch: 0,
+        depth: 100,
+        modifier: 1,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+      },
+      modules: [Pagination, EffectCoverflow, Autoplay],
+    });
+  });
+</script>
+
+<style>
+  .swiper {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+
+  .swiper-slide {
+    background-position: center;
+    background-size: cover;
+    aspect-ratio: 16 / 9;
+    width: 50%;
+  }
+
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+  }
+</style>

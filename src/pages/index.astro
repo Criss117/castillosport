@@ -1,0 +1,41 @@
+---
+import HeroSlider from "@/components/sections/HeroSlider.astro";
+import MainLayout from "../layouts/MainLayout.astro";
+import ProductsSection from "@/components/sections/ProductsSection.astro";
+import IntermediateSection from "@/components/IntermediateSection.astro";
+import { SECTIONS, INTERMEDIATE_SECTIONS } from "@/lib/constants";
+import AboutSection from "@/components/sections/AboutSection.astro";
+import AlliesSection from "@/components/sections/AlliesSection.astro";
+import FooterSection from "@/components/sections/FooterSection.astro";
+import type { Product } from "@/data/entities/Product";
+import ProductRepository from "@/data/repositories/ProductRepository";
+
+const productRepository = new ProductRepository();
+
+const products: Product[] = await productRepository.getProducts(12);
+---
+
+<MainLayout title="Inicio" currentPath="Inicio">
+  <HeroSlider />
+  <ProductsSection
+    title={SECTIONS.supplements.title}
+    id={SECTIONS.supplements.id}
+    products={products.slice(0, 6)}
+  />
+  <IntermediateSection
+    label={INTERMEDIATE_SECTIONS.supplements.label}
+    href={INTERMEDIATE_SECTIONS.supplements.href}
+  />
+  <ProductsSection
+    title={SECTIONS.implements.title}
+    id={SECTIONS.implements.id}
+    products={products.slice(6, 12)}
+  />
+  <IntermediateSection
+    label={INTERMEDIATE_SECTIONS.implements.label}
+    href={INTERMEDIATE_SECTIONS.implements.href}
+  />
+  <AboutSection />
+  <AlliesSection />
+  <FooterSection />
+</MainLayout>

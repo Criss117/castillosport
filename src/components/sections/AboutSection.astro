@@ -1,0 +1,97 @@
+---
+import { Image } from "astro:assets";
+
+import AboutCard from "../AboutCard.astro";
+import SectionContainer from "../SectionContainer.astro";
+import CommentCard from "../CommentCard.astro";
+import { ABOUT_CARDS } from "@/lib/constants";
+---
+
+<SectionContainer id="about-section" class="py-24">
+  <div class="grid grid-cols-2 gap-10">
+    <AboutCard class="col-span-2 justify-center flex items-center">
+      <h4 class="text-white text-xl font-semibold">
+        Envió gratis por compras mayores a $200.000.
+      </h4>
+    </AboutCard>
+    {
+      ABOUT_CARDS.map((ac) => (
+        <AboutCard class="justify-start px-10 gap-x-10 flex items-center">
+          <figure>
+            <Image
+              src={ac.icon}
+              alt={ac.title}
+              class="w-8 h-8"
+              width={32}
+              height={32}
+            />
+          </figure>
+
+          <article>
+            <h4 class="text-white font-semibold text-xl">{ac.title}</h4>
+            <p class="text-white">{ac.description}</p>
+          </article>
+        </AboutCard>
+      ))
+    }
+  </div>
+</SectionContainer>
+<section
+  class="bg-hero-pattern h-[500px] w-full bg-no-repeat bg-cover bg-center"
+  id="about-section"
+>
+  <div class="h-full w-full bg-black/60 z-10">
+    <div class="w-full h-full flex justify-end container items-center">
+      <section
+        class:list={[
+          "rounded-xl py-10 w-[500px] h-[400px] flex items-center flex-col justify-between",
+          "bg-gradient-to-l bg-[#e48303] from-primary",
+        ]}
+      >
+        <header>
+          <h4 class="text-white text-5xl font-bold text-center">
+            Castillo Sport
+          </h4>
+          <p class="text-white font-semibold text-3xl text-center text-balance">
+            Tienda de suplementos Ofertas, Descuentos
+          </p>
+        </header>
+        <p class="text-white font-semibold text-3xl text-center text-balance">
+          Suplementos Deportivos a Crédito
+        </p>
+        <a href="" class="bg-white px-5 py-2 rounded-lg uppercase"
+          ><span>Ver ofertas</span></a
+        >
+      </section>
+    </div>
+  </div>
+</section>
+<SectionContainer id="clients-comments" class="py-24">
+  <h2
+    class="text-5xl font-bold text-center text-balance relative"
+    id="clients-comments-title"
+  >
+    Comentarios de nuetros clientes
+  </h2>
+  <section class="mt-20 grid grid-cols-2 xl:grid-cols-3 gap-x-10 gap-y-32">
+    {
+      Array(6)
+        .fill(1)
+        .map(() => <CommentCard />)
+    }
+  </section>
+</SectionContainer>
+
+<style>
+  #clients-comments-title::before {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 2px;
+    position: absolute;
+    background-color: #334155;
+    top: 120%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+</style>

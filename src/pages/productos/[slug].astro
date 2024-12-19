@@ -1,0 +1,19 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import CompleteProduct from "@/components/CompleteProduct.astro";
+import CompleteProductSkeleton from "@/components/CompleteProductSkeleton.astro";
+
+const { slug } = Astro.params;
+
+if (!slug) {
+  return Astro.redirect("/productos");
+}
+
+export const prerender = false;
+---
+
+<MainLayout currentPath="Tienda">
+  <CompleteProduct slug={slug} server:defer>
+    <CompleteProductSkeleton slot="fallback" />
+  </CompleteProduct>
+</MainLayout>

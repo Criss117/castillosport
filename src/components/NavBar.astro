@@ -1,0 +1,33 @@
+---
+import { NAV_ITEMS } from "@/lib/constants";
+
+interface Props {
+  currentPath?: (typeof NAV_ITEMS)[number]["name"];
+}
+
+const { currentPath } = Astro.props;
+---
+
+<nav class="bg-primary w-full sticky top-0 z-10 hidden md:block">
+  <div class="container h-14 flex items-center justify-between mx-auto">
+    <ul class="flex gap-x-4 mx-auto">
+      {
+        NAV_ITEMS.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class:list={[
+                "text-white border-2 py-2 px-4 rounded-full  transition-colors",
+                currentPath === item.name
+                  ? "border-white"
+                  : "border-transparent hover:border-slate-500",
+              ]}
+            >
+              {item.name}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</nav>

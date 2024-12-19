@@ -1,0 +1,40 @@
+---
+interface Props {
+  title?: string;
+  id: string;
+  class?: string;
+}
+
+const { class: className, title, id } = Astro.props;
+---
+
+<section class:list={["bg-bgsecondary", className]} id={id}>
+  <div class="w-[90%] lg:w-[60%] mx-auto">
+    {
+      title && (
+        <header class="flex items-center mx-auto justify-center gap-x-5">
+          <span id="span-title" />
+          <span id="span-title" />
+          <span id="span-title" />
+          <h2 class="text-5xl uppercase font-bold text-center text-balance">
+            {title}
+          </h2>
+          <span id="span-title" />
+          <span id="span-title" />
+          <span id="span-title" />
+        </header>
+      )
+    }
+    <slot />
+  </div>
+</section>
+
+<style>
+  #span-title::before {
+    content: "";
+    display: block;
+    width: 10px;
+    height: 10px;
+    @apply bg-slate-700;
+  }
+</style>

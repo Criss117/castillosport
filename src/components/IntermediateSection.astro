@@ -1,0 +1,33 @@
+---
+import { IMAGES } from "@/lib/constants";
+import { Image } from "astro:assets";
+
+interface Props {
+  label: string;
+  href: string;
+}
+
+const { label, href } = Astro.props;
+---
+
+<div class="bg-secondary w-full h-40 flex justify-center items-center">
+  <a
+    href={href}
+    class:list={[
+      "bg-primary text-white text-center rounded-lg",
+      "px-12 py-3 font-medium text-3xl flex items-center gap-x-2",
+      "hover:bg-primary/80 transition-colors",
+    ]}
+  >
+    <Image
+      src={IMAGES.svg.dumbbell}
+      alt={label}
+      class="mr-2"
+      width={40}
+      height={40}
+    />
+    <span>
+      {label}
+    </span>
+  </a>
+</div>
