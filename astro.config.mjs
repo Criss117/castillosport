@@ -15,7 +15,5 @@ export default defineConfig({
   integrations: [tailwind(), svelte()],
   output: "static",
 
-  adapter: node({
-    mode: "standalone",
-  }),
+  adapter: vercel(),
 });
