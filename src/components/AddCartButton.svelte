@@ -42,7 +42,8 @@
   />
   <button
     onclick={handlerAddToCart}
-    class="bg-primary px-5 py-2 rounded-lg text-white text-xl font-semibold lg:w-4/5 h-12 md:w-[50%] w-full mx-auto"
+    class="bg-primary px-5 py-2 rounded-lg text-white text-xl font-semibold
+    lg:w-4/5 h-12 md:w-[50%] w-full mx-auto hover:bg-primary/80 transition-colors active:bg-secondary"
   >
     Agregar al carrito
   </button>

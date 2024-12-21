@@ -1,6 +1,6 @@
 import { writable } from "svelte/store";
 
-export const isCartSheetOpen = writable(false);
+export const isCartSheetOpen = writable(true);
 
 export function openCartSheet() {
   isCartSheetOpen.set(true);
