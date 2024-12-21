@@ -45,19 +45,19 @@ export function addToCart(item: NewCartItem) {
       });
 
       newItems = items;
+    } else {
+      newItems = items.map((cartItem) => {
+        if (cartItem.slug === item.slug) {
+          return {
+            ...cartItem,
+            quantity: cartItem.quantity + item.quantity,
+            totalPrice: cartItem.totalPrice + item.price * item.quantity,
+          };
+        }
+
+        return cartItem;
+      });
     }
-
-    newItems = items.map((cartItem) => {
-      if (cartItem.slug === item.slug) {
-        return {
-          ...cartItem,
-          quantity: cartItem.quantity + item.quantity,
-          totalPrice: cartItem.totalPrice + item.price * item.quantity,
-        };
-      }
-
-      return cartItem;
-    });
 
     localStorage.setItem("cartItems", JSON.stringify(newItems));
     return newItems;
