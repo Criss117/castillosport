@@ -16,7 +16,7 @@ const { class: className, title, id } = Astro.props;
           <span id="span-title" />
           <span id="span-title" />
           <span id="span-title" />
-          <h2 class="text-5xl uppercase font-bold text-center text-balance">
+          <h2 class="text-3xl md:text-5xl uppercase font-bold text-center text-balance">
             {title}
           </h2>
           <span id="span-title" />
@@ -35,6 +35,6 @@ const { class: className, title, id } = Astro.props;
     display: block;
     width: 10px;
     height: 10px;
-    @apply bg-slate-700;
+    @apply bg-slate-700 hidden md:block;
   }
 </style>

@@ -8,9 +8,9 @@ import { ABOUT_CARDS } from "@/lib/constants";
 ---
 
 <SectionContainer id="about-section" class="py-24">
-  <div class="grid grid-cols-2 gap-10">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
     <AboutCard class="col-span-2 justify-center flex items-center">
-      <h4 class="text-white text-xl font-semibold">
+      <h4 class="text-white text-xl font-semibold text-center">
         Envió gratis por compras mayores a $200.000.
       </h4>
     </AboutCard>
@@ -73,7 +73,9 @@ import { ABOUT_CARDS } from "@/lib/constants";
   >
     Comentarios de nuetros clientes
   </h2>
-  <section class="mt-20 grid grid-cols-2 xl:grid-cols-3 gap-x-10 gap-y-32">
+  <section
+    class="mt-20 grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-x-10 gap-y-32"
+  >
     {
       Array(6)
         .fill(1)

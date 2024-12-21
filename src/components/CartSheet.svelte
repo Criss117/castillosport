@@ -1,6 +1,11 @@
 <script lang="ts">
   import { isCartSheetOpen, closeCartSheet } from "@/store/cart-sheet.store";
-  import { cartItems, removeFromCart } from "@/store/cart.store";
+  import {
+    cartItems,
+    removeFromCart,
+    totalItems,
+    totalPrice,
+  } from "@/store/cart.store";
 
   import { cn } from "@/lib";
   import { formatCurrency } from "@/lib/currency-utils";
@@ -18,38 +23,36 @@
 ></div>
 <div
   class={cn(
-    "fixed top-0 w-[600px] h-screen bg-white z-50 shadow-lg transition-all duration-500",
-    $isCartSheetOpen ? "right-0" : "-right-[600px]"
+    "fixed top-0 w-full xl:w-[500px] h-screen bg-bgsecondary z-50 shadow-lg transition-all duration-500",
+    $isCartSheetOpen ? "right-0" : "-right-[100%]"
   )}
 >
   <header class="w-full flex justify-end p-5">
     <button onclick={closeCartSheet} class="font-bold text-xl"> X </button>
   </header>
 
-  <section>
+  <section class="space-y-5 relative h-full">
     {#if $cartItems.length === 0}
-      <div class="flex justify-center items-center p-5">
+      <div class="flex justify-center p-5">
         <p class="text-center text-xl font-bold">Tu carrito está vacío</p>
       </div>
     {/if}
     {#each $cartItems as item}
       <div
-        class="flex justify-between items-center p-5 border-t border-b border-gray-200"
+        class="p-5 border mx-2 rounded-lg shadow-sm border-gray-200 bg-white"
       >
-        <div class="flex items-center justify-between w-full">
-          <button onclick={() => removeFromCart(item.slug)}>
-            <span class="text-sm font-bold text-red-500">Eliminar</span>
-          </button>
-          <div class="flex items-center gap-2">
-            <img
-              src={item.image}
-              alt={item.name}
-              class="w-10 h-10 rounded-full"
-            />
-            <h3 class="font-bold text-sm product-title max-w-[200px]">
+        <div class="flex w-full gap-x-5">
+          <img src={item.image} alt={item.name} class="w-10 h-10" />
+          <div class="flex gap-2 flex-col items-start">
+            <h3 class="font-bold text-sm product-title max-w-[250px]">
               {item.name}
             </h3>
+            <button onclick={() => removeFromCart(item.slug)}>
+              <span class="text-sm font-bold text-red-500">Eliminar</span>
+            </button>
           </div>
+        </div>
+        <div class="flex justify-between mt-5 ml-14">
           <p class="text-lg font-bold">
             {item.quantity} <span class="text-sm">Unidades</span>
           </p>
@@ -59,14 +62,31 @@
         </div>
       </div>
     {/each}
+    <section
+      class="absolute bottom-20 w-full justify-between flex flex-col bg-white shadow-lg rounded-lg p-5 mx-2 space-y-5"
+    >
+      <header class="flex justify-between">
+        <p>Productos ({$totalItems})</p>
+        <p>{formatCurrency($totalPrice)}</p>
+      </header>
+      <div class="flex justify-between">
+        <p class="text-xl font-bold">Total</p>
+        <p class="text-xl font-bold">{formatCurrency($totalPrice)}</p>
+      </div>
+      <a
+        href="/carrito"
+        class="bg-primary px-5 py-2 rounded-lg text-white text-xl font-semibold text-center"
+        >Continuar compra</a
+      >
+    </section>
   </section>
 </div>
 
 <style>
   .product-title {
     display: -webkit-box;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
