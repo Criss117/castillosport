@@ -10,6 +10,8 @@ import FooterSection from "@/components/sections/FooterSection.astro";
 import type { Product } from "@/data/entities/Product";
 import ProductRepository from "@/data/repositories/ProductRepository";
 
+import ChildrenExample from "@/components/ChildrenExample.svelte";
+
 const productRepository = new ProductRepository();
 
 const products: Product[] = await productRepository.getProducts(12);

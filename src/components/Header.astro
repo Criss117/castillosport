@@ -3,6 +3,8 @@ import { Image } from "astro:assets";
 import { IMAGES, SOCIALS } from "@/lib/constants";
 import SearchInput from "./SearchInput.astro";
 import ShopingCart from "./ShopingCart.svelte";
+import CartSheet from "./CartSheet.svelte";
+import BurgerMenu from "./BurgerMenu.svelte";
 ---
 
 <header
@@ -43,15 +45,12 @@ import ShopingCart from "./ShopingCart.svelte";
   <div class="w-1/3 items-center hidden md:flex">
     <SearchInput />
   </div>
-
-  <!-- <Image
-      src={IMAGES.svg.shopingCart}
-      alt="shopping cart"
-      width={25}
-      height={25}
-    /> -->
-  <div class="flex gap-x-5 items-center justify-end md:w-1/3">
-    <ShopingCart client:load />
+  <div class="gap-x-5 items-center justify-end md:w-1/3 hidden md:flex">
+    <CartSheet client:load />
     <Image src={IMAGES.svg.user} alt="user" width={40} height={40} />
+  </div>
+
+  <div class="md:hidden">
+    <BurgerMenu client:visible />
   </div>
 </header>

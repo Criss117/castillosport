@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { isCartSheetOpen, closeCartSheet } from "@/store/cart-sheet.store";
   import {
     cartItems,
     removeFromCart,
@@ -7,45 +6,22 @@
     totalPrice,
   } from "@/store/cart.store";
 
-  import { cn } from "@/lib";
   import { formatCurrency } from "@/lib/currency-utils";
 
-  $effect(() => {
-    if ($isCartSheetOpen) {
-      document.body.style.overflow = "hidden";
-      document.body.style.height = "100vh";
-    } else {
-      document.body.style.overflow = "unset";
-      document.body.style.height = "unset";
-    }
-
-    return () => {
-      document.body.style.overflow = "unset";
-      document.body.style.height = "unset";
-    };
-  });
+  import { IMAGES } from "@/lib/constants";
+  import Sheet from "./Sheet.svelte";
 </script>
 
-<div
-  aria-hidden="true"
-  tabindex="0"
-  role="button"
-  onclick={closeCartSheet}
-  class={cn(
-    "fixed top-0 left-0 w-full h-full cursor-default",
-    $isCartSheetOpen ? "z-50 bg-black/50 backdrop-blur-sm" : "-z-50"
-  )}
-></div>
-<div
-  class={cn(
-    "fixed top-0 w-full xl:w-[500px] h-screen bg-bgsecondary z-50 shadow-lg transition-all duration-500",
-    $isCartSheetOpen ? "right-0" : "-right-[100%]"
-  )}
->
-  <header class="w-full flex justify-end p-5">
-    <button onclick={closeCartSheet} class="font-bold text-xl"> X </button>
-  </header>
+{#snippet trigger()}
+  <img src={IMAGES.svg.shopingCart} alt="shoping-cart" class="w-6 h-6" />
+  <p
+    class="absolute bottom-6 right-0 translate-x-1/2 translate-y-1/2 font-semibold text-primary"
+  >
+    {$totalItems}
+  </p>
+{/snippet}
 
+<Sheet {trigger}>
   <section class="h-full">
     {#if $cartItems.length === 0}
       <div class="flex justify-center p-5">
@@ -60,7 +36,7 @@
           <div class="flex w-full gap-x-5">
             <img src={item.image} alt={item.name} class="w-10 h-10" />
             <div class="flex gap-2 flex-col items-start">
-              <a href={`/productos/${item.slug}`} onclick={closeCartSheet}>
+              <a href={`/productos/${item.slug}`}>
                 <h3 class="font-bold text-sm product-title max-w-[250px]">
                   {item.name}
                 </h3>
@@ -103,7 +79,7 @@
       </section>
     {/if}
   </section>
-</div>
+</Sheet>
 
 <style>
   .product-title {

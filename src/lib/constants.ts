@@ -11,6 +11,7 @@ export const IMAGES = {
     thumbsUp: "/assets/svg/thumbs-up.svg",
     idCard: "/assets/svg/id-card.svg",
     bike: "/assets/svg/bike.svg",
+    burgerMenu: "/assets/svg/burger.svg",
   },
   logo: "/castillo-sport-logo.webp",
   heroImage1:
