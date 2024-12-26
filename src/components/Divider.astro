@@ -1,1 +1,13 @@
-<div class="w-full h-0.5 bg-slate-300"></div>
+---
+interface Props {
+  class?: string;
+  orientation?: "horizontal" | "vertical";
+}
+
+const { class: className, orientation = "horizontal" } = Astro.props;
+---
+
+<div class:list={["bg-slate-300", className]}>
+  {orientation === "horizontal" && <div class="w-full h-0.5" />}
+  {orientation === "vertical" && <div class="w-0.5 h-full" />}
+</div>

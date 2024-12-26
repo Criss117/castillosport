@@ -1,10 +1,23 @@
 ---
+interface Props {
+  category?: string;
+}
+
 import ProductRepository from "@/data/repositories/ProductRepository";
 import ProductCard from "../ProductCard.astro";
+import type { Product } from "@/data/entities/Product";
 
 const productRepository = new ProductRepository();
 
-const products = await productRepository.getProducts(6);
+const { category } = Astro.props;
+
+let products: Product[] = [];
+
+if (category) {
+  products = await productRepository.getProductsByCategory(category);
+} else {
+  products = await productRepository.getProducts(6);
+}
 ---
 
 <div

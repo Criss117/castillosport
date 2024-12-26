@@ -1,0 +1,22 @@
+---
+import ShopLayout from "@/layouts/ShopLayout.astro";
+import ShopSection from "@/components/sections/ShopSection.astro";
+import ShopSectionSkeleton from "@/components/sections/ShopSectionSkeleton.astro";
+
+const { category } = Astro.params;
+
+if (!category) {
+  return Astro.redirect("/tienda");
+}
+
+export const prerender = false;
+---
+
+<ShopLayout>
+  <section class="w-3/4">
+    <h3 class="text-primary text-3xl font-bold">{category}</h3>
+    <ShopSection server:defer category={category}>
+      <ShopSectionSkeleton slot="fallback" />
+    </ShopSection>
+  </section>
+</ShopLayout>

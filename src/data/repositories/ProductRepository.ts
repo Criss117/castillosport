@@ -67,6 +67,18 @@ class ProductRepository {
 
     return data;
   }
+
+  async getProductsByCategory(category: string): Promise<Product[]> {
+    const { data, status } = await HttpClient.get<FakeStoreProduct[]>(
+      `/products/category/${category}`
+    );
+
+    if (status !== 200) {
+      throw new Error("Failed to fetch products");
+    }
+
+    return data.map((product) => ProductMapper.map(product));
+  }
 }
 
 export default ProductRepository;

@@ -21,6 +21,7 @@ export const IMAGES = {
   heroImage3:
     "/assets/heros/SOMOS-EL-ALIADO-QUE-NECECITA-TU-CUERPO-ecommerce-3-1024x577.webp",
   pexelsPhoto: "/assets/pexels-photo.webp",
+  shopImage: "/assets/suplementos-deportivos-Conoce-los-mitos-y-verdades.webp",
   allies: {
     bpiSports: "/assets/allies/logo-bpi-sports-300x175.png",
   },

@@ -4,7 +4,7 @@ import { ClientRouter } from "astro:transitions";
 import Header from "@/components/Header.astro";
 import NavBar from "@/components/NavBar.astro";
 import { NAV_ITEMS } from "@/lib/constants";
-import CartSheet from "@/components/CartSheet.svelte";
+import FooterSection from "@/components/sections/FooterSection.astro";
 
 interface Props {
   title?: string;
@@ -29,6 +29,7 @@ const { title = "Inicio", currentPath } = Astro.props;
     <main>
       <slot />
     </main>
+    <FooterSection />
   </body>
 </html>
 

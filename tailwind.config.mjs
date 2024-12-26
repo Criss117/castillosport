@@ -7,6 +7,8 @@ export default {
         "hero-pattern":
           "url('/assets/heros/SOMOS-EL-ALIADO-QUE-NECECITA-TU-CUERPO-ecommerce-1-1024x577.webp')",
         "pexels-photo": "url('/assets/pexels-photo.webp')",
+        "shop-image":
+          "url('/assets/suplementos-deportivos-Conoce-los-mitos-y-verdades.webp')",
       },
       colors: {
         primary: "#f75806",

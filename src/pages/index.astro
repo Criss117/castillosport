@@ -6,11 +6,8 @@ import IntermediateSection from "@/components/IntermediateSection.astro";
 import { SECTIONS, INTERMEDIATE_SECTIONS } from "@/lib/constants";
 import AboutSection from "@/components/sections/AboutSection.astro";
 import AlliesSection from "@/components/sections/AlliesSection.astro";
-import FooterSection from "@/components/sections/FooterSection.astro";
 import type { Product } from "@/data/entities/Product";
 import ProductRepository from "@/data/repositories/ProductRepository";
-
-import ChildrenExample from "@/components/ChildrenExample.svelte";
 
 const productRepository = new ProductRepository();
 
@@ -39,5 +36,4 @@ const products: Product[] = await productRepository.getProducts(12);
   />
   <AboutSection />
   <AlliesSection />
-  <FooterSection />
 </MainLayout>
